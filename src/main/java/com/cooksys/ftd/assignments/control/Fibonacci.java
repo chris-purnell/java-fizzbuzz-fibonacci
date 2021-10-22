@@ -1,7 +1,5 @@
 package com.cooksys.ftd.assignments.control;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * The Fibonacci sequence is simply and recursively defined: the first two elements are `1`, and
  * every other element is equal to the sum of its two preceding elements. For example:
@@ -24,7 +22,20 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given index is less than zero
      */
     public static int atIndex(int i) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (i < 0) throw new IllegalArgumentException();
+
+        if (i == 0 || i == 1) {
+            return 1;
+        }
+        int counter = 2, previous1 = 1, previous2 = 1;
+
+        while (counter < i) {
+            int currentIndex = previous1 + previous2;
+            previous2 = previous1;
+            previous1 = currentIndex;
+            counter++;
+        }
+        return previous1 + previous2;
     }
 
     /**
@@ -38,7 +49,19 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if ((start < 0 || end < 0) || end < start) throw new IllegalArgumentException();
+
+        int[] returnValue = new int[end - start];
+        int indexBegins = start;
+        int counter = 0;
+
+        while (indexBegins < end) {
+            returnValue[counter] = atIndex(indexBegins);
+            counter++;
+            indexBegins++;
+        }
+
+        return returnValue;
     }
 
     /**
@@ -49,6 +72,8 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given count is negative
      */
     public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (count < 0) throw new IllegalArgumentException();
+
+        return slice(0, count);
     }
 }

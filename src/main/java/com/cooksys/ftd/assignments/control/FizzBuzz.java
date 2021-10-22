@@ -1,6 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * FizzBuzz is an old programming exercise.
@@ -26,7 +27,10 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if b is zero
      */
     public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (b == 0) throw new IllegalArgumentException();
+
+        boolean doesItDivide = a % b == 0 ? true : false;
+        return doesItDivide;
     }
 
     /**
@@ -41,7 +45,13 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new NotImplementedException();
+
+        String incomingMessage = divides(n, 15) ? "FizzBuzz" :
+                divides(n, 5) ? "Buzz" :
+                        divides(n, 3) ? "Fizz" :
+                                null;
+
+        return incomingMessage != null ? String.format("%d: %s", n, incomingMessage) : null;
     }
 
     /**
@@ -50,12 +60,24 @@ public class FizzBuzz {
      * it should be excluded from the resulting array.
      *
      * @param start the number to start with (inclusive)
-     * @param end the number to end with (exclusive)
+     * @param end   the number to end with (exclusive)
      * @return an array of divisibility messages
      * @throws IllegalArgumentException if the given end is less than the given start
      */
     public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (end < start) throw new IllegalArgumentException();
+
+        ArrayList<String> messageHolder = new ArrayList<>();
+        for (int currentMessage = start; currentMessage < end; currentMessage++) {
+            System.out.println(currentMessage);
+
+            if (message(currentMessage) != null) {
+                messageHolder.add(message(currentMessage));
+            }
+        }
+
+        String[] messagesReturn = messageHolder.toArray(new String[messageHolder.size()]);
+        return messagesReturn;
     }
 
     /**
@@ -63,7 +85,7 @@ public class FizzBuzz {
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
+
     }
 
 }
